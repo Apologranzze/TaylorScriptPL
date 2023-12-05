@@ -98,6 +98,7 @@ class Lexer:
                 elif self.current_char in IDENTSTART:
                     tokens.append(self.make_word())
 
+
             else:
                 pos_start = self.pos.copy()
                 char = self.current_char
@@ -150,12 +151,46 @@ class Lexer:
             'The1': 'TRUE',
             'THE0': 'FALSE',
             'Tailor': 'TAILOR',
-            
+            '+': 'ADD_OPRTR',
+            '-': 'SUB_OPRTR',
+            '*': 'MULT_OPRTR',
+            '/': 'DIV_OPRTR',
+            '**': 'EXPONENT_OPRTR',
+            '%': 'MODULO_OPRTR',
+            '++': 'INCREMENT_OPRTR',
+            '--': 'DECREMENT_OPRTR',
+            '+=': 'ADD_ASSIGN_OPRTR',
+            '-=': 'SUB_ASSIGN_OPRTR',
+            '*=': 'MULT_ASSIGN_OPRTR',
+            '/=': 'DIV_ASSIGN_OPRTR',
+            '%=': 'MOD_ASSIGN_OPRTR',
+            '==': 'EQUALS_OPRTR',
+            '<': 'LESS_THAN_OPRTR',
+            '>': 'GREATER_OPRTR',
+            '<=': 'LESS_EQUAL_OPRTR',
+            '>=': 'MORE_EQUAL_OPRTR',
+            '!=': 'NOT_EQUAL_OPRTR',
+            '<>': 'NOT_EQUAL_OPRTR',
+            '!': 'NOT',
+            '[': 'OPEN_SCOPE_DELIM',
+            ']': 'CLOSE_SCOPE_DELIM',
+            ';': 'STMNT_DELIM',
+            '{': 'OPEN_ARRLIST_DELIM',
+            '}': 'CLOSE_ARRLIST_DELIM',
+            'Int_Style': 'INT_DATA',
+            'Float_Style': 'FLOAT_DATA',
+            'char_Style': 'CHAR_DATA'
         }
         if num_str in reserve_key_words:
             return Token(reserve_key_words[num_str], num_str)
         else:
             return Token('IDENT', num_str)
+
+    def make_string(self):
+        num_str = ''
+
+        while self.current_char != None and self.current_char == "'":
+            pass
 
 
 # RUN
