@@ -65,12 +65,13 @@ class Position:
 
 
 class Token:
-    def __init__(self, type, value=None):
-        self.type = type
+    def __init__(self, ttype, value=None):
+        self.type = ttype
         self.value = value
 
     def __repr__(self):
-        if self.value: return f'{self.type}:{self.value}'
+        if self.value:
+            return f'{self.type}:{self.value}'
         return f'{self.type}'
 
 
@@ -89,7 +90,7 @@ class Lexer:
     def make_tokens(self):
         tokens = []
 
-        while self.current_char != None:
+        while self.current_char is not None:
             if self.current_char in ' \t\n':
                 self.advance()
             elif self.current_char in CHARACTERSET:
@@ -97,7 +98,6 @@ class Lexer:
                     tokens.append(self.make_number())
                 elif self.current_char in IDENTSTART:
                     tokens.append(self.make_word())
-
 
             else:
                 pos_start = self.pos.copy()
@@ -110,9 +110,10 @@ class Lexer:
         num_str = ''
         dot_count = 0
 
-        while self.current_char != None and self.current_char in DIGITS + '.':
+        while self.current_char is not None and self.current_char in DIGITS + '.':
             if self.current_char == '.':
-                if dot_count == 1: break
+                if dot_count == 1:
+                    break
                 dot_count += 1
                 num_str += '.'
             else:
@@ -127,7 +128,7 @@ class Lexer:
     def make_word(self):
         num_str = ''
 
-        while self.current_char != None and self.current_char in VALIDIDENT:
+        while self.current_char is not None and self.current_char in VALIDIDENT:
             num_str += self.current_char
             self.advance()
 
@@ -187,9 +188,9 @@ class Lexer:
             return Token('IDENT', num_str)
 
     def make_string(self):
-        num_str = ''
+        # num_str = ''
 
-        while self.current_char != None and self.current_char == "'":
+        while self.current_char is not None and self.current_char == "'":
             pass
 
 
